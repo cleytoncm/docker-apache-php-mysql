@@ -23,12 +23,8 @@ RUN apt-get update
 
 RUN docker-php-ext-install mbstring
 
-RUN docker-php-ext-configure gd
+RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg
 
 RUN docker-php-ext-install -j$(nproc) gd
 
 RUN docker-php-ext-enable pdo pdo_mysql mysqli 
-
-RUN pecl install redis-5.1.1 \
-    && pecl install xdebug-2.8.1 \
-    && docker-php-ext-enable redis xdebug
