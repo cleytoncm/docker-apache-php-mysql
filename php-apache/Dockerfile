@@ -25,6 +25,13 @@ RUN docker-php-ext-install mbstring
 
 RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg
 
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Add user for laravel application
+RUN groupadd -g 1000 www
+RUN useradd -u 1000 -ms /bin/bash -g www www
+
 RUN docker-php-ext-install -j$(nproc) gd
 
-RUN docker-php-ext-enable pdo pdo_mysql mysqli 
+RUN docker-php-ext-enable pdo pdo_mysql mysqli gd mysqli
