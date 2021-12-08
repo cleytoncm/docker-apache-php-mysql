@@ -21,7 +21,7 @@ RUN apt-get update -y && apt-get install -y libfreetype6-dev \
 
 RUN apt-get update
 
-RUN docker-php-ext-install mbstring
+RUN docker-php-ext-install pdo_mysql mysqli mbstring exif pcntl bcmath gd zip
 
 RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg
 
@@ -34,4 +34,4 @@ RUN useradd -u 1000 -ms /bin/bash -g www www
 
 RUN docker-php-ext-install -j$(nproc) gd
 
-RUN docker-php-ext-enable pdo pdo_mysql mysqli gd mysqli
+RUN docker-php-ext-enable pdo pdo_mysql mysqli mbstring exif pcntl bcmath gd zip
