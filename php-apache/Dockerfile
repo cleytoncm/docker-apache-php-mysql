@@ -32,6 +32,13 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 
+RUN printf 'date.timezone = "America/Sao_Paulo"\n' > /usr/local/etc/php/conf.d/tzone.ini
+RUN printf 'post_max_size = 50M\n' > /usr/local/etc/php/conf.d/fileupload.ini
+RUN printf 'upload_max_filesize = 8M\n' >> /usr/local/etc/php/conf.d/fileupload.ini
+RUN printf 'max_execution_time = 600\n' >> /usr/local/etc/php/conf.d/max_execution_time.ini
+RUN printf 'memory_limit = 256M\n' >> /usr/local/etc/php/conf.d/memory_limit.ini
+RUN printf 'expose_php = Off\n' >> /usr/local/etc/php/conf.d/expose_php.ini
+
 RUN docker-php-ext-install -j$(nproc) gd
 
 RUN docker-php-ext-enable pdo pdo_mysql mysqli mbstring exif pcntl bcmath gd zip

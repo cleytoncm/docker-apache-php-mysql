@@ -12,7 +12,7 @@ services:
             - 'mysql'
 
     mysql:
-        image: mysql:5.7.21
+        image: mysql:8.0.30
         container_name: mysql
         ports:
             - 3306:3306
@@ -27,7 +27,6 @@ services:
             - --innodb_buffer_pool_size=3GB
             - --max_allowed_packet=20M
             - --bulk_insert_buffer_size=20M
-            - --query_cache_size=32M
             - --skip-character-set-client-handshake
             - --skip-host-cache
         volumes:
