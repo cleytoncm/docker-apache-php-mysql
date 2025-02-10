@@ -1,6 +1,7 @@
 FROM php:8.0-apache
 
 RUN a2enmod rewrite
+RUN a2enmod headers
 
 RUN docker-php-ext-install pdo pdo_mysql mysqli
 
@@ -34,7 +35,7 @@ RUN useradd -u 1000 -ms /bin/bash -g www www
 
 RUN printf 'date.timezone = "America/Sao_Paulo"\n' > /usr/local/etc/php/conf.d/tzone.ini
 RUN printf 'post_max_size = 50M\n' > /usr/local/etc/php/conf.d/fileupload.ini
-RUN printf 'upload_max_filesize = 8M\n' >> /usr/local/etc/php/conf.d/fileupload.ini
+RUN printf 'upload_max_filesize = 20M\n' >> /usr/local/etc/php/conf.d/fileupload.ini
 RUN printf 'max_execution_time = 600\n' >> /usr/local/etc/php/conf.d/max_execution_time.ini
 RUN printf 'memory_limit = 256M\n' >> /usr/local/etc/php/conf.d/memory_limit.ini
 RUN printf 'expose_php = Off\n' >> /usr/local/etc/php/conf.d/expose_php.ini
